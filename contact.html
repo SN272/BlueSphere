@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - BlueSphere</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="about.html">ℹ️ About Us</a></li>
+      <li><a href="innovation.html">💡 Innovations</a></li>
+      <li><a href="features.html">⚙️ Features</a></li>
+      <li><a href="audience.html">👥 Target Audience</a></li>
+      <li><a href="contact.html">📞 Contact Us</a></li>
+    </ul>
+  </div>
+
+  <div class="topbar">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <div class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="innovation.html">Innovation</a>
+      <a href="features.html">Features</a>
+      <a href="audience.html">Audience</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <section class="section">
+      <h2>Contact Us</h2>
+      <form action="#" method="post">
+        <label for="name">Full Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="message">Your Message:</label><br>
+        <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+        <input type="submit" value="Send Message">
+      </form>
+    </section>
+
+    <footer>
+      <p>© 2025 FloatChat | Built for SIH 2025 | Climate Action & Ocean Intelligence</p>
+    </footer>
+  </div>
+
+</body>
+</html>
