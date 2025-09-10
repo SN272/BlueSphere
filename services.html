@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - BlueSphere</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="https://deep-sea-dialog.lovable.app/">Argo Desk</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="appliedresearch.html">Applied Research</a></li>
+      <li><a href="forecast.html">Forecast</a></li>
+      <li><a href="dataset.html">Float Dataset</a></li>
+      <li><a href="signin.html">Login</a></li>
+      <li><a href="contact.html">📞 Contact Us</a></li>
+    </ul>
+  </div>
+
+  <div class="topbar">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <div class="top-nav">
+      <a href="signin.html">User</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Oceanographic Services</h2>
+          <p class="section-subtitle">
+            Quick access to essential support and resources at your fingertips.
+          </p>
+        </div>
+        <div class="features-grid-boxes">
+          <div class="feature-box">
+            <div class="feature-icon-box">
+              <i class="fa-solid fa-fish"></i>
+            </div>
+            <h3 class="feature-title-box">Marine Resource Management</h3>
+            <p class="feature-description-box">AI-driven predictive analysis for sustainable fishing, aquaculture, and
+              habitat conservation</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon-box">
+              <i class="fa-solid fa-ship"></i>
+            </div>
+            <h3 class="feature-title-box">Blue Economy Support</h3>
+            <p class="feature-description-box">Predictive Model for shipping safety queries and more to promote
+              sustainable coastal development</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon-box">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="feature-title-box">Disaster Risk Mitigation</h3>
+            <p class="feature-description-box">Stay updated with real-time crisis alerts and more features to safeguard
+              communities</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon-box">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h3 class="feature-title-box">Community Engagement</h3>
+            <p class="feature-description-box">A platform for conversation, cooperation, and collaboration to strengthen
+              communities from within</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon-box">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="feature-title-box">Defense & Maritime Security</h3>
+            <p class="feature-description-box">in progress..</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon-box">
+              <i class="fa-solid fa-vr-cardboard"></i>
+            </div>
+            <h3 class="feature-title-box">AR-based Visual Support</h3>
+            <p class="feature-description-box">on the way..</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const sidebar = document.getElementById('sidebar');
+      const toggleBtn = document.getElementById('toggleBtn');
+      toggleBtn && toggleBtn.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.toggle('visible');
+        } else {
+          sidebar.classList.toggle('hidden');
+        }
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          sidebar.classList.remove('visible');
+          sidebar.classList.remove('hidden');
+        }
+      });
+    </script>
+    <footer>
+      <p>2025 FloatChat | Built for SIH 2025 | Climate Action & Ocean Intelligence</p>
+    </footer>
+  </div>
+
+</body>
+
+</html>
