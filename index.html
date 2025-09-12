@@ -2,94 +2,944 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BlueSphere - Ocean Data Intelligence</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ---------- Variables & Base ---------- */
+    :root {
+      --bg-0: #eaf6fb;
+      /* Example: background image variable */
+      --bg-img: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      --primary-1: #0077b6;
+      --primary-2: #00b4d8;
+      --deep: #002e47;
+      --muted: #556b6b;
+      --card-bg: #ffffff;
+      --glass: rgba(255, 255, 255, 0.85);
+      --accent: #90e0ef;
+      --shadow: 0 10px 30px rgba(2, 18, 28, 0.12);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, "Helvetica Neue", Arial;
+      /* background: linear-gradient(180deg, #f7fbfd 0%, #eaf6fb 60%); */
+      color: black;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* ---------- Sidebar (kept as original structure) ---------- */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0px;
+      width: 220px;
+      height: 100%;
+      background-color: rgba(30, 42, 56, 0.95);
+      padding-top: 20px;
+      transition: transform 0.3s ease;
+      z-index: 1200;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      margin: 0;
+      padding: 60px 10px 20px 10px;
+    }
+
+    .sidebar ul li {
+      margin: 12px 0;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #ffffff;
+      display: block;
+      padding: 12px 14px;
+      border-radius: 8px;
+      transition: background .25s, transform .15s;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .sidebar ul li a:hover {
+      background-color: #184a59;
+      transform: translateX(4px);
+    }
+
+    /* ---------- Topbar (kept as original structure) ---------- */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0px;
+      right: 0;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      backdrop-filter: blur(6px);
+      z-index: 1300;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.05));
+      box-shadow: 0 2px 8px rgba(2, 18, 28, 0.08);
+      color: #fff;
+    }
+
+    .toggle-btn {
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #fff;
+    }
+
+    .top-nav a {
+      margin-left: 12px;
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.95;
+      font-weight: 600;
+    }
+
+    .top-nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- Main content area ---------- */
+    .main-content {
+      margin-left: 220px;
+      padding: 90px 42px 60px;
+      min-height: 100vh;
+    }
+
+    /* ---------- Hero / Intro ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 34px;
+    }
+
+    .hero-left {
+      background: rgba(255, 255, 255, 0.60);
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0 0 12px 0;
+      font-size: 2.6rem;
+      color: var(--deep);
+      line-height: 1.03;
+    }
+
+    .hero-sub {
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+    }
+
+    .data-liners {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .data-liner {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 12px 16px;
+      min-width: 130px;
+      box-shadow: 0 6px 18px rgba(2, 18, 28, 0.06);
+      text-align: center;
+    }
+
+    .data-liner .num {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-1);
+    }
+
+    .data-liner .lbl {
+      font-size: 0.85rem;
+      color: #536b6b;
+    }
+
+    /* Hero visual / callout */
+    .hero-right {
+      background: rgba(255, 255, 255, 0.60);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-large {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cta-btn {
+      background: linear-gradient(90deg, var(--primary-1), var(--primary-2));
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 119, 182, 0.18);
+    }
+
+    .small-note {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ---------- Feature panel — unique stacked / spotlight style ---------- */
+    .features-spot {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 28px;
+    }
+
+    .spot-left {
+      position: relative;
+      padding: 28px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(239, 250, 255, 0.98));
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    /* stacked tiles */
+    .stack {
+      display: flex;
+      gap: 14px;
+      flex-direction: column;
+    }
+
+    .tile {
+      background: linear-gradient(90deg, #fff, #f7fbfd);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: transform .28s ease, box-shadow .28s ease;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(2, 18, 28, 0.06);
+    }
+
+    .tile:hover {
+      transform: translateX(8px);
+      box-shadow: 0 14px 30px rgba(2, 18, 28, 0.12);
+    }
+
+    .tile .ico {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: white;
+      background: linear-gradient(180deg, var(--primary-1), var(--primary-2));
+      flex-shrink: 0;
+    }
+
+    .tile h4 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--deep);
+    }
+
+    .tile p {
+      margin: 6px 0 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    /* spotlight / description area */
+    .spot-right {
+      padding: 22px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #e8f9ff, #ffffff);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .spot-right h3 {
+      margin: 0;
+      color: var(--deep);
+      font-size: 1.2rem;
+    }
+
+    .spot-right p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .learn-link {
+      margin-top: 8px;
+      color: var(--primary-1);
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* ---------- Multi-user section (separate as requested) ---------- */
+    .multi-user {
+      margin-top: 30px;
+      padding: 24px;
+      border-radius: 14px;
+      background: linear-gradient(90deg, rgba(0, 180, 216, 0.05), rgba(0, 119, 182, 0.03));
+      box-shadow: var(--shadow);
+    }
+
+    .user-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .user-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 6px 16px rgba(2, 18, 28, 0.06);
+    }
+
+    .user-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 14px 30px rgba(2, 18, 28, 0.12);
+    }
+
+    .user-card .icon {
+      font-size: 1.5rem;
+      color: var(--primary-2);
+      margin-bottom: 8px;
+    }
+
+    .user-card h5 {
+      margin: 6px 0;
+      color: var(--deep);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .user-card p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+      min-height: 40px;
+    }
+
+    /* reveal detail on hover (desktop) */
+    .user-card .detail {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      bottom: -10px;
+      min-width: 90%;
+      background: #fff;
+      color: #003049;
+      padding: 14px 16px;
+      box-shadow: 0 4px 18px rgba(2, 18, 28, 0.10);
+      border-radius: 12px;
+      font-size: 1.15rem;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s, transform .28s;
+    }
+
+    .user-card:hover .detail,
+    .user-card.open .detail {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0%);
+    }
+
+    /* make reveal clickable on touch via class toggled by JS */
+    .user-card.open .detail {
+      transform: translateY(0%);
+    }
+
+    /* ---------- Chatbox ---------- */
+    .chatbot {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      width: 300px;
+      max-width: calc(100% - 40px);
+      background: linear-gradient(180deg, #fff, #f7fbfd);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 12px 32px rgba(2, 18, 28, 0.18);
+      z-index: 1400;
+    }
+
+    .chatbot h4 {
+      margin: 0 0 8px 0;
+      color: var(--deep);
+      font-size: 1rem;
+    }
+
+    .chat-history {
+      max-height: 160px;
+      overflow: auto;
+      padding: 6px;
+      margin-bottom: 8px;
+    }
+
+    .chat-bubble {
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 10px;
+      margin: 6px 0;
+      font-size: 0.9rem;
+    }
+
+    .chat-user {
+      background: var(--primary-1);
+      color: #fff;
+      float: right;
+    }
+
+    .chat-bot {
+      background: #eef7fb;
+      color: var(--deep);
+      float: left;
+    }
+
+    .chat-input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #e0eef5;
+      margin-bottom: 8px;
+    }
+
+    /* ---------- Footer (kept as original) ---------- */
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      color: #0e2433;
+      font-size: 0.95rem;
+      padding: 24px 10px;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:1040px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .features-spot {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .main-content {
+        padding: 90px 20px 50px;
+        margin-left: 220px;
+      }
+    }
+
+    @media (max-width:768px) {
+      .sidebar {
+        transform: translateX(-260px);
+        position: fixed;
+        z-index: 1500;
+      }
+
+      .sidebar.visible {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding-top: 120px;
+      }
+
+      .topbar {
+        left: 0;
+      }
+
+      .chatbot {
+        right: 10px;
+        left: 10px;
+        width: auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
+  <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="about.html">ℹ️ About Us</a></li>
-      <li><a href="innovation.html">💡 Innovations</a></li>
-      <li><a href="features.html">⚙️ Features</a></li>
-      <li><a href="audience.html">👥 Target Audience</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="https://deep-sea-dialog.lovable.app/">Argo Desk</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="appliedresearch.html">Applied Research</a></li>
+      <li><a href="forecast.html">Forecast</a></li>
+      <li><a href="dataset.html">Float Dataset</a></li>
+      <li><a href="signin.html">Login</a></li>
       <li><a href="contact.html">📞 Contact Us</a></li>
     </ul>
   </div>
 
+  <!-- Topbar -->
   <div class="topbar">
-    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <button class="toggle-btn" id="toggleBtn">☰</button>
     <div class="top-nav">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="innovation.html">Innovation</a>
-      <a href="features.html">Features</a>
-      <a href="audience.html">Audience</a>
-      <a href="contact.html">Contact</a>
+      <a href="signin.html">User</a>
+      <a href="contact.html">Contact Us</a>
     </div>
   </div>
 
+  <!-- Main content -->
   <div class="main-content">
-    <section class="section">
-      <h1 style="text-align: center; font-size: 3em; margin-bottom: 20px; animation: fadeIn 2s;">🌊 Welcome to BlueSphere</h1>
-      <p style="text-align: center; font-size: 1.2em; max-width: 900px; margin: auto; animation: fadeIn 2s 1s;">
-        Making ocean intelligence conversational, visual, and inclusive. Dive deep into the world's oceans through interactive visualizations, real-time data insights, and powerful AI-driven conversational queries.
-      </p>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <h1 id="hero-title">BlueSphere — Ocean Research & Technology</h1>
+        <p class="hero-sub">Making ARGO float data conversational, visual, and actionable for students, researchers,
+          authorities and communities. Built for SIH 2025 — explore live maps, digital twins, and optimized energy site
+          mapping.</p>
 
-      <div class="features-grid" style="margin-top: 40px;">
-        <div class="feature-box">
-          <h3>🧠 AI-Powered Chatbot</h3>
-          <p>Ask natural language questions about oceanographic data and get instant answers. No technical knowledge needed.</p>
+        <!-- Intro data liners / counters -->
+        <div class="data-liners" aria-hidden="false">
+          <div class="data-liner">
+            <div class="num" data-target="1250">0</div>
+            <div class="lbl">ARGO floats processed</div>
+          </div>
+          <div class="data-liner">
+            <div class="num" data-target="48000">0</div>
+            <div class="lbl">Real-time measurements/day</div>
+          </div>
+          <div class="data-liner">
+            <div class="num" data-target="120">0</div>
+            <div class="lbl">Analytical models</div>
+          </div>
         </div>
 
-        <div class="feature-box">
-          <h3>📊 Interactive Visualizations</h3>
-          <p>Explore ocean maps, float trajectories, and depth-time plots designed to help researchers and enthusiasts understand data at a glance.</p>
-        </div>
-
-        <div class="feature-box">
-          <h3>⚠️ Disaster Alerts</h3>
-          <p>Automatically detects cyclone, tsunami, and flooding risks from incoming data and provides urgent safety warnings.</p>
-        </div>
-
-        <div class="feature-box">
-          <h3>🌍 Multi-language Support</h3>
-          <p>Inclusive design with support for Hindi, Tamil, Bengali, and English to help a diverse audience explore data with ease.</p>
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="cta-btn" id="exploreBtn">Explore Features</button>
+          <button class="cta-btn"
+            style="background:transparent; border:2px solid rgba(0,119,182,0.15); color:var(--deep)"
+            onclick="window.location.href='signin.html'">Sign in</button>
         </div>
       </div>
 
-      <div class="additional-content" style="margin-top: 60px;">
-        <h2 style="text-align: center; animation: fadeIn 2s;">🔎 Why BlueSphere Matters</h2>
-        <p style="max-width: 800px; margin: auto; text-align: center; animation: fadeIn 2s 1s;">
-          BlueSphere bridges the gap between oceanographic data experts and non-experts. Our tool democratizes access to ARGO float data, allowing:
-        </p>
-        <ul style="max-width: 800px; margin: auto; text-align: left; padding-left: 20px; animation: fadeIn 2s 2s;">
-          <li>Researchers & scientists to get easy access to climate and marine data.</li>
-          <li>Policy makers to make informed decisions based on real-time data insights.</li>
-          <li>Students & educators to learn ocean science interactively through gamified content.</li>
-          <li>Fishermen & coastal communities to get proactive safety alerts in their local language.</li>
-        </ul>
+      <div class="hero-right">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:0.85rem; color:var(--muted); font-weight:600">Live Status</div>
+            <div style="font-weight:800; font-size:1.4rem; color:var(--deep)">No active alerts</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:0.8rem; color:var(--muted)">Last update</div>
+            <div style="font-weight:700; color:var(--primary-1)">Just now</div>
+          </div>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div
+          style="background:linear-gradient(90deg,#eafcff,#ffffff); border-radius:10px; padding:10px; display:flex; align-items:center; gap:12px;">
+          <div
+            style="width:64px; height:64px; background:var(--primary-2); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.4rem;">
+            <i class="fa-solid fa-globe"></i>
+          </div>
+          <div>
+            <div style="font-weight:700; color:var(--deep)">Global Coverage</div>
+            <div style="color:var(--muted); font-size:0.95rem">ARGO floats, satellites & coastal sensors integrated
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="small-note">SIH 2025 Highlight: Live demo-ready pipelines for data ingestion, visualization &
+            decision support.</div>
+        </div>
       </div>
     </section>
 
-    <!-- Chatbot -->
-    <div class="chatbot-container">
-      <h3>🌊 BlueSphere Chatbot</h3>
-      <div id="chat-history" style="max-height: 200px; overflow-y: auto; margin-bottom: 10px;"></div>
-      <textarea id="chat-input" rows="3" placeholder="Ask about ocean data..."></textarea>
-      <button onclick="sendChat()">Send</button>
+    <!-- FEATURES SPOTLIGHT (unique stacked tiles + spotlight description) -->
+    <section class="features-spot" id="features">
+      <div class="spot-left">
+        <div class="stack" id="stackTiles">
+          <div class="tile" data-key="realtime">
+            <div class="ico"><i class="fa-solid fa-wifi"></i></div>
+            <div>
+              <h4>Real-time Data Integration</h4>
+              <p>Seamlessly ingest live ARGO and sensor feeds for instant analytics.</p>
+            </div>
+          </div>
+
+          <div class="tile" data-key="lang">
+            <div class="ico"><i class="fa-solid fa-language"></i></div>
+            <div>
+              <h4>Multi-language Support</h4>
+              <p>Conversational UI & local language outputs (Hindi, Tamil, Bengali, English, ...).</p>
+            </div>
+          </div>
+
+          <div class="tile" data-key="inclusive">
+            <div class="ico"><i class="fa-solid fa-map"></i></div>
+            <div>
+              <h4>Inclusive Maps & Visuals</h4>
+              <p>Accessibility first visualizations built for diverse users and low-bandwidth contexts.</p>
+            </div>
+          </div>
+
+          <div class="tile" data-key="custom">
+            <div class="ico"><i class="fa-solid fa-sliders"></i></div>
+            <div>
+              <h4>Customization & Personalization</h4>
+              <p>Dashboards, alerts, and modules tailored to each user's workflow.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-right" id="spotlight"
+        style="height:100%; display:flex; flex-direction:column; justify-content:center;">
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+          <h3 style="margin-bottom:10px; font-size: 3rem;">Interactive Feature Spotlight</h3>
+          <p id="spot-desc" style="margin-bottom:14px; font-size: 1.5rem;">Hover or tap a tile to see a focused
+            description and quick actions. Tiles are live! Click to explore data and demos.</p>
+        </div>
+        <a class="learn-link" id="learnLink" role="link" tabindex="0" href="https://deep-sea-dialog.lovable.app/">
+          View demo →
+        </a>
+      </div>
+    </section>
+
+    <!-- Multi-User Section (separate) -->
+
+    <div class="user-grid" style="margin-top:18px;">
+      <div class="user-card" data-role="student">
+        <div class="icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <h5 style="font-size:1.15rem;">Students</h5>
+        <p style="font-size:1.05rem;">Explainable AI that breaks analysis into clear steps and learning tips.</p>
+        <div style="height:38px;"></div>
+        <div class="detail">
+          Explain float data simply with visuals and step-by-step guidance.
+        </div>
+      </div>
+
+      <div class="user-card" data-role="researcher">
+        <div class="icon"><i class="fa-solid fa-flask"></i></div>
+        <h5 style="font-size:1.15rem;">Researchers</h5>
+        <p style="font-size:1.05rem;">Analytical AI with raw-data access, exportable results and reproducible pipelines.
+        </p>
+        <div style="height:38px;"></div>
+        <div class="detail">
+          Analyze datasets deeply, highlighting trends, correlations, and anomalies.
+        </div>
+      </div>
+
+      <div class="user-card" data-role="organization">
+        <div class="icon"><i class="fa-solid fa-building"></i></div>
+        <h5 style="font-size:1.15rem;">Organizations</h5>
+        <p style="font-size:1.05rem;">Applied AI for planning, resource allocation and operational dashboards.</p>
+        <div style="height:38px;"></div>
+        <div class="detail">
+          Provide optimized insights for marine operations, energy planning, or resource management.
+        </div>
+      </div>
+
+      <div class="user-card" data-role="ngo">
+        <div class="icon"><i class="fa-solid fa-hands-holding"></i></div>
+        <h5 style="font-size:1.15rem;">NGOs</h5>
+        <p style="font-size:1.05rem;">Accessible, mission-driven insights for community impact and monitoring.</p>
+        <div style="height:38px;"></div>
+        <div class="detail">
+          Summarize ocean data to identify environmental risks and community impact areas.
+        </div>
+      </div>
+
+      <div class="user-card" data-role="authority">
+        <div class="icon"><i class="fa-solid fa-landmark"></i></div>
+        <h5 style="font-size:1.15rem;">Authorities</h5>
+        <p style="font-size:1.05rem;">Monitoring, reporting and policy-ready analytics for governance decisions.</p>
+        <div style="height:38px;"></div>
+        <div class="detail">
+          Generate actionable reports for policy decisions and disaster preparedness.
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- Chatbot (kept simple) -->
+    <div class="chatbot" aria-live="polite">
+      <h4>Need quick help?</h4>
+      <div id="chat-history" class="chat-history" role="log" aria-atomic="false"></div>
+      <textarea id="chat-input" class="chat-input" rows="2"
+        placeholder="Ask something like: 'How to access the ArgoDesk'"></textarea>
+      <div style="display:flex; gap:8px;">
+        <button class="cta-btn" style="flex:1" onclick="sendChat()">Send</button>
+        <button style="background:transparent; border:none; color:var(--muted); font-weight:700;"
+          onclick="clearChat()">Clear</button>
+      </div>
     </div>
 
-    <footer style="margin-top: 80px;">
-      <p>© 2025 FloatChat | Built for SIH 2025 | Climate Action & Ocean Intelligence</p>
+    <!-- Footer (exactly as in original) -->
+    <footer>
+      <p>2025 FloatChat | Built for SIH 2025 | Climate Action & Ocean Intelligence</p>
     </footer>
   </div>
 
+  <!-- Inline JavaScript (all behavior) -->
+  <script>
+    // ---- Sidebar toggle (works for mobile & desktop)
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+    toggleBtn && toggleBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.toggle('visible');
+      } else {
+        sidebar.classList.toggle('hidden');
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('visible');
+        sidebar.classList.remove('hidden');
+      }
+    });
+
+    // ---- Smooth scroll for Explore button
+    document.getElementById('exploreBtn').addEventListener('click', () => {
+      document.getElementById('features').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // ---- Animated counters (intro data liners)
+    function animateCounters() {
+      const els = document.querySelectorAll('.data-liner .num');
+      els.forEach(el => {
+        const target = +el.dataset.target || 0;
+        const start = 0;
+        const duration = 1400;
+        let startTime = null;
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          const val = Math.floor(progress * (target - start) + start);
+          el.textContent = val.toLocaleString();
+          if (progress < 1) window.requestAnimationFrame(step);
+        }
+        window.requestAnimationFrame(step);
+      });
+    }
+    window.addEventListener('load', animateCounters);
+
+    // ---- Feature tile spotlight (hover & click)
+    const tiles = document.querySelectorAll('.tile');
+    const spotDesc = document.getElementById('spot-desc');
+    const learnLink = document.getElementById('learnLink');
+
+    const descriptions = {
+      realtime: 'Real-time Data Integration : pipelines ingest ARGO floats, coastal sensors and satellite feeds for instant analytics.',
+      lang: 'Multi-language Support : localized conversational outputs (Hindi/Tamil/Bengali) and translated map captions for wider reach.',
+      inclusive: 'Inclusive Maps & Visuals : colorblind-safe palettes, simplified views for low bandwidth, and screen-reader-friendly summaries.',
+      custom: 'Customization & Personalization : saved dashboards, alert rules, and role-based modules tailored to your needs.'
+    };
+
+    // Show default text when not hovering any tile
+    tiles.forEach(tile => {
+      tile.addEventListener('mouseenter', () => {
+        const k = tile.dataset.key;
+        spotDesc.textContent = descriptions[k] || 'Explore this feature';
+        learnLink.dataset.key = k;
+      });
+      tile.addEventListener('mouseleave', () => {
+        spotDesc.textContent = 'Hover or tap a tile to see a focused description and quick actions. Tiles are live! Click to explore data and demos.';
+        learnLink.dataset.key = '';
+      });
+      tile.addEventListener('click', () => {
+        const k = tile.dataset.key;
+        // quick routing - change these to the real pages you have
+        const routeMap = {
+          realtime: 'services.html#realtime',
+          lang: 'services.html#multilang',
+          inclusive: 'services.html#inclusive',
+          custom: 'services.html#custom'
+        };
+        const url = routeMap[k] || 'appliedresearch.html';
+        window.location.href = url;
+      });
+      // keyboard accessibility: focus shows same
+      tile.addEventListener('focus', () => {
+        const k = tile.dataset.key;
+        spotDesc.textContent = descriptions[k] || '';
+        learnLink.dataset.key = k;
+      });
+      tile.addEventListener('blur', () => {
+        spotDesc.textContent = 'Hover or tap a tile to see a focused description and quick actions. Tiles are live — click to explore data and demos.';
+        learnLink.dataset.key = '';
+      });
+    });
+
+    tiles.forEach(tile => {
+      tile.addEventListener('mouseenter', () => {
+        const k = tile.dataset.key;
+        spotDesc.textContent = descriptions[k] || 'Explore this feature';
+        learnLink.dataset.key = k;
+      });
+      tile.addEventListener('click', () => {
+        const k = tile.dataset.key;
+        // quick routing - change these to the real pages you have
+        const routeMap = {
+          realtime: 'services.html#realtime',
+          lang: 'services.html#multilang',
+          inclusive: 'services.html#inclusive',
+          custom: 'services.html#custom'
+        };
+        const url = routeMap[k] || 'appliedresearch.html';
+        window.location.href = url;
+      });
+      // keyboard accessibility: focus shows same
+      tile.addEventListener('focus', () => {
+        const k = tile.dataset.key;
+        spotDesc.textContent = descriptions[k] || '';
+        learnLink.dataset.key = k;
+      });
+    });
+
+    learnLink.addEventListener('click', () => {
+      const k = learnLink.dataset.key || 'heat';
+      tiles.forEach(t => { if (t.dataset.key === k) t.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+    });
+
+    // ---- Reveal on scroll for stacked tiles and user cards
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('visible');
+          observer.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    // apply to tiles and user-cards
+    document.querySelectorAll('.tile, .user-card').forEach(el => {
+      el.classList.add('hidden');
+      observer.observe(el);
+    });
+
+    // simple CSS toggle for 'hidden' -> 'visible' effect
+    document.addEventListener('animationend', () => { /* placeholder if needed */ });
+
+    // ---- Multi-user hover/tap detail toggle for touch devices
+    document.querySelectorAll('.user-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // on mobile, allow toggling open
+        if (window.innerWidth <= 768) {
+          card.classList.toggle('open');
+        }
+      });
+    });
+
+    // ---- Chat widget (simple simulated response)
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const history = document.getElementById('chat-history');
+      const text = (input.value || '').trim();
+      if (!text) return;
+      const u = document.createElement('div');
+      u.className = 'chat-bubble chat-user';
+      u.textContent = text;
+      history.appendChild(u);
+      history.scrollTop = history.scrollHeight;
+      input.value = '';
+      // simulated bot reply
+      setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'chat-bubble chat-bot';
+        b.textContent = '🌊 BlueSphere: Thanks — fetching live insights. (Demo reply)';
+        history.appendChild(b);
+        history.scrollTop = history.scrollHeight;
+      }, 800);
+    }
+    function clearChat() {
+      const history = document.getElementById('chat-history');
+      history.innerHTML = '';
+    }
+    // expose sendChat to global for inline onclick use
+    window.sendChat = sendChat;
+    window.clearChat = clearChat;
+
+    // ---- Accessibility: keyboard shortcut (E) to jump to features
+    window.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 'e') {
+        document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // ---- small UX fix: remove 'hidden' class name set earlier and replace by visible class for animation
+    document.addEventListener('DOMContentLoaded', () => {
+      // replace the 'hidden' class used in observer with CSS transitions:
+      document.querySelectorAll('.hidden').forEach(el => {
+        // add CSS styles to animate in (via inline style fallback)
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(20px)';
+      });
+      // when observer marks visible, add inline styles
+      const visObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.transition = 'opacity .6s ease, transform .6s ease';
+            e.target.style.opacity = 1;
+            e.target.style.transform = 'translateY(0)';
+            visObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.18 });
+      document.querySelectorAll('.tile, .user-card').forEach(el => visObserver.observe(el));
+    });
+  </script>
 </body>
 
 </html>

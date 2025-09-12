@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - BlueSphere</title>
+  <title>BlueSphere - Ocean Data Intelligence</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
-<body>
 
+<body style="margin:0; font-family: 'Poppins', sans-serif;  color:#1a1a1a;">
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="about.html">ℹ️ About Us</a></li>
-      <li><a href="innovation.html">💡 Innovations</a></li>
-      <li><a href="features.html">⚙️ Features</a></li>
-      <li><a href="audience.html">👥 Target Audience</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="https://deep-sea-dialog.lovable.app/">Argo Desk</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="appliedresearch.html">Applied Research</a></li>
+      <li><a href="forecast.html">Forecast</a></li>
+      <li><a href="dataset.html">Float Dataset</a></li>
+      <li><a href="signin.html">Login</a></li>
       <li><a href="contact.html">📞 Contact Us</a></li>
     </ul>
   </div>
@@ -25,31 +28,123 @@
   <div class="topbar">
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
     <div class="top-nav">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="innovation.html">Innovation</a>
-      <a href="features.html">Features</a>
-      <a href="audience.html">Audience</a>
-      <a href="contact.html">Contact</a>
+      <a href="signin.html">User</a>
+      <a href="contact.html">Contact Us</a>
     </div>
   </div>
 
-  <!-- About Us Content -->
-  <div class="main-content">
-    <section class="section">
-      <h2>About Us</h2>
-      <p>
-        FloatChat is an AI-powered conversational interface that allows researchers, policymakers,
-        and communities to query, explore, and visualize ARGO float ocean data in plain English.
-        By combining Large Language Models (LLMs), vector databases, and geospatial dashboards,
-        FloatChat democratizes access to complex oceanographic datasets.
-      </p>
-    </section>
+  <!-- MAIN CONTENT -->
+  <div style="margin-left:220px; padding:60px 40px;">
+    <h1 style="font-size:2.5rem; color:#004c70; margin-bottom:10px;">Welcome to Argo</h1>
+    <p style="max-width:800px; font-size:1.1rem; color:#444; margin-bottom:50px;">
+      A unified space where innovation meets accessibility — enabling real-time ocean research, inclusive collaboration,
+      and smarter decision-making for all.
+    </p>
 
-    <footer>
-      <p>© 2025 FloatChat | Built for SIH 2025 | Climate Action & Ocean Intelligence</p>
-    </footer>
+    <!-- FEATURE CARDS -->
+    <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center;">
+      <!-- Card -->
+      <div class="feature"
+        style="flex:1 1 280px; min-width:280px; max-width:350px; background:#fff; border-radius:20px; padding:40px 25px; box-shadow:0 6px 18px rgba(0,0,0,0.08); text-align:center; transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        <div style="font-size:2.5rem; color:#0077b6; margin-bottom:18px;"><i class="fa-solid fa-database"></i></div>
+        <h3 style="font-size:1.4rem; font-weight:600; margin-bottom:12px;">Real-time Data Integration</h3>
+        <p style="color:#555;">Live insights from oceanographic floats, sensors, and satellite data in one platform.</p>
+      </div>
+
+      <!-- Card -->
+      <div class="feature"
+        style="flex:1 1 280px; min-width:280px; max-width:350px; background:#fff; border-radius:20px; padding:40px 25px; box-shadow:0 6px 18px rgba(0,0,0,0.08); text-align:center; transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        <div style="font-size:2.5rem; color:#0077b6; margin-bottom:18px;"><i class="fa-solid fa-language"></i></div>
+        <h3 style="font-size:1.4rem; font-weight:600; margin-bottom:12px;">Multi-Language Users</h3>
+        <p style="color:#555;">Breaking language barriers to support global collaboration and accessibility.</p>
+      </div>
+
+      <!-- Card -->
+      <div class="feature"
+        style="flex:1 1 280px; min-width:280px; max-width:350px; background:#fff; border-radius:20px; padding:40px 25px; box-shadow:0 6px 18px rgba(0,0,0,0.08); text-align:center; transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        <div style="font-size:2.5rem; color:#0077b6; margin-bottom:18px;"><i class="fa-solid fa-map"></i></div>
+        <h3 style="font-size:1.4rem; font-weight:600; margin-bottom:12px;">Inclusive Maps & Visuals</h3>
+        <p style="color:#555;">Intuitive visuals and accessibility-first designs for diverse communities.</p>
+      </div>
+
+      <!-- Card -->
+      <div class="feature"
+        style="flex:1 1 280px; min-width:280px; max-width:350px; background:#fff; border-radius:20px; padding:40px 25px; box-shadow:0 6px 18px rgba(0,0,0,0.08); text-align:center; transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer;">
+        <div style="font-size:2.5rem; color:#0077b6; margin-bottom:18px;"><i class="fa-solid fa-sliders"></i></div>
+        <h3 style="font-size:1.4rem; font-weight:600; margin-bottom:12px;">Customisation & Personalization</h3>
+        <p style="color:#555;">Tailored dashboards, flexible modules, and personalized workflows.</p>
+      </div>
+    </div>
+
+    <!-- MULTI-USER SECTION -->
+    <div
+      style="margin-top:80px; padding:50px; background:#e6f3f9; border-radius:20px; box-shadow:0 8px 20px rgba(0,0,0,0.08);">
+      <h2 style="font-size:2rem; color:#004c70; margin-bottom:20px; text-align:center;">
+        Multi-User Access
+      </h2>
+      <p style="text-align:center; max-width:700px; margin:0 auto 40px; color:#444; font-size:1.05rem;">
+        Adaptive AI experiences designed for diverse communities — from learners to leaders.
+      </p>
+
+      <!-- User Tags -->
+      <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
+        <div
+          style="flex:1 1 200px; min-width:220px; background:#fff; padding:20px; border-radius:15px; text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.05);">
+          <i class="fa-solid fa-user-graduate" style="font-size:2rem; color:#0077b6; margin-bottom:10px;"></i>
+          <h3 style="font-size:1.1rem; margin-bottom:8px;">Students</h3>
+          <p style="font-size:0.95rem; color:#555;">Explainable AI to guide learning and exploration.</p>
+        </div>
+
+        <div
+          style="flex:1 1 200px; min-width:220px; background:#fff; padding:20px; border-radius:15px; text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.05);">
+          <i class="fa-solid fa-flask" style="font-size:2rem; color:#0077b6; margin-bottom:10px;"></i>
+          <h3 style="font-size:1.1rem; margin-bottom:8px;">Researchers</h3>
+          <p style="font-size:0.95rem; color:#555;">Data-rich insights powered by analytical AI.</p>
+        </div>
+
+        <div
+          style="flex:1 1 200px; min-width:220px; background:#fff; padding:20px; border-radius:15px; text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.05);">
+          <i class="fa-solid fa-building" style="font-size:2rem; color:#0077b6; margin-bottom:10px;"></i>
+          <h3 style="font-size:1.1rem; margin-bottom:8px;">Organizations</h3>
+          <p style="font-size:0.95rem; color:#555;">Optimized planning & resource management with applied AI.</p>
+        </div>
+
+        <div
+          style="flex:1 1 200px; min-width:220px; background:#fff; padding:20px; border-radius:15px; text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.05);">
+          <i class="fa-solid fa-handshake-angle" style="font-size:2rem; color:#0077b6; margin-bottom:10px;"></i>
+          <h3 style="font-size:1.1rem; margin-bottom:8px;">NGOs</h3>
+          <p style="font-size:0.95rem; color:#555;">AI for social impact — accessible and mission-driven.</p>
+        </div>
+
+        <div
+          style="flex:1 1 200px; min-width:220px; background:#fff; padding:20px; border-radius:15px; text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.05);">
+          <i class="fa-solid fa-landmark" style="font-size:2rem; color:#0077b6; margin-bottom:10px;"></i>
+          <h3 style="font-size:1.1rem; margin-bottom:8px;">Authorities</h3>
+          <p style="font-size:0.95rem; color:#555;">AI-driven monitoring & policy support for governance.</p>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Footer -->
+  <footer>
+    <p>2025 BlueSphere | Built for SIH 2025 | Ocean Intelligence for All</p>
+  </footer>
+  <!-- INLINE JS for animations -->
+  <script>
+    const features = document.querySelectorAll('.feature');
+    features.forEach(box => {
+      box.addEventListener('mouseover', () => {
+        box.style.transform = 'translateY(-10px) scale(1.03)';
+        box.style.boxShadow = '0 12px 24px rgba(0,0,0,0.15)';
+      });
+      box.addEventListener('mouseout', () => {
+        box.style.transform = 'translateY(0) scale(1)';
+        box.style.boxShadow = '0 6px 18px rgba(0,0,0,0.08)';
+      });
+    });
+  </script>
+
 </body>
+
 </html>

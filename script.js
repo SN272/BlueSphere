@@ -60,3 +60,8 @@ function sendChat() {
 
   inputField.value = '';
 }
+function handleAuth(event) {
+  event.preventDefault();
+  const username = document.getElementById('username').value;
+  alert(`Welcome, ${username}! This is just a UI demo.`);
+}

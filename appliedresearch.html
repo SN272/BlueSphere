@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research & Innovations - BlueSphere</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="script.js" defer></script>
+  <style>
+    /* === APPLIED RESEARCH CONTENT STYLING === */
+
+    .research-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .research-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      padding: 30px;
+      margin: 0 40px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #e0f7fa, #ffffff);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+    }
+
+    .research-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .research-item:hover {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      transform: translateY(-5px);
+    }
+
+    .research-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .research-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .research-image i {
+      font-size: 120px;
+      color: #084746;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .research-item:hover .research-image i {
+      transform: scale(1.1) rotate(5deg);
+      color: #0A7C7B;
+    }
+
+    .research-content {
+      flex: 1;
+      margin-right: 0px;
+    }
+
+    .research-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #0A3D62;
+    }
+
+    .research-description {
+      font-size: 1.2rem;
+      max-width: fit-content;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .research-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px;
+      }
+
+      .research-item:nth-child(even) {
+        flex-direction: column;
+      }
+
+      .research-image {
+        margin-top: auto;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="https://deep-sea-dialog.lovable.app/">Argo Desk</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="appliedresearch.html">Applied Research</a></li>
+      <li><a href="forecast.html">Forecast</a></li>
+      <li><a href="dataset.html">Float Dataset</a></li>
+      <li><a href="signin.html">Login</a></li>
+      <li><a href="contact.html">📞 Contact Us</a></li>
+    </ul>
+  </div>
+
+  <div class="topbar">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <div class="top-nav">
+      <a href="signin.html">User</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+  <div class="main-content">
+    <section id="applied-research">
+      <div class="section-header">
+        <h2 class="section-title">Marine Research & Innovation</h2>
+        <p class="section-subtitle" style="max-width: 900px; margin: auto; margin-top: 10px;">
+          Where scientific discovery meets technological advancement to unlock the potential of the deep for a
+          sustainable
+          ocean future
+          <br>
+        </p>
+      </div>
+
+      <div class="research-grid" style="margin-top: 50px;">
+        <!-- Ocean Heat Maps -->
+        <div class="research-item">
+          <div class="research-image">
+            <i class="fa-solid fa-water"></i>
+          </div>
+          <div class="research-content">
+            <h3 class="research-title" style="font-size: 2rem;">Ocean Heat Maps</h3>
+            <p class="research-description">
+              Mapping the ocean’s hidden heat with precision technology and revealing thermal patterns that shape our
+              climate.
+            </p>
+          </div>
+        </div>
+
+        <!-- Digital Twin Visualization -->
+        <div class="research-item">
+          <div class="research-image">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <div class="research-content">
+            <h3 class="research-title" style="font-size: 2rem; ">Marine Ocean Twin</h3>
+            <p class="research-description">
+              A virtual mirror of the ocean, bringing real-time insights and immersive visualization for better
+              decision-making.
+            </p>
+          </div>
+        </div>
+
+        <!-- Renewable Energy Setup -->
+        <div class="research-item">
+          <div class="research-image">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div class="research-content">
+            <h3 class="research-title" style="font-size: 2rem;">Energy Site Mapping</h3>
+            <p class="research-description">
+              Mapping renewable energy potential by turning float data into actionable insights for smarter, sustainable
+              setups
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- JS for Scroll Animation -->
+  <script>
+    const items = document.querySelectorAll('.research-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    items.forEach(item => observer.observe(item));
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+    toggleBtn && toggleBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.toggle('visible');
+      } else {
+        sidebar.classList.toggle('hidden');
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('visible');
+        sidebar.classList.remove('hidden');
+      }
+    });
+  </script>
+  </section>
+  <footer>
+    <p>2025 FloatChat | Built for SIH 2025 | Climate Action & Ocean Intelligence</p>
+  </footer>
+  </div>
+
+</body>
+
+</html>
